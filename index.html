@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Две кнопки со звуками</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            flex-direction: column;
+            gap: 20px; /* Расстояние между кнопками */
+        }
+        .sound-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .sound-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button class="sound-button" onclick="playSound('sound1')">Нажми</button>
+    <button class="sound-button" onclick="playSound('sound2')">Нажми</button>
+
+    <audio id="sound1" src="audio/Download.mp3"></audio>
+    <audio id="sound2" src="audio/nasha-kvadroberskaia-zhizn.mp3"></audio>
+
+    <script>
+        let currentAudio = null; // Переменная для хранения текущего воспроизводимого звука
+
+        function playSound(audioId) {
+            if (currentAudio) {
+                currentAudio.pause(); // Останавливаем текущий звук
+                currentAudio.currentTime = 0; // Сбрасываем его на начало
+            }
+            const newAudio = document.getElementById(audioId);
+            newAudio.play().catch(error => console.error('Ошибка воспроизведения:', error));
+            currentAudio = newAudio; // Сохраняем новый звук как текущий
+        }
+    </script>
+</body>
+</html>
